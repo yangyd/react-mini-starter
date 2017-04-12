@@ -1,0 +1,30 @@
+
+npm install --save
+  react
+  react-dom
+  webpack
+  webpack-dev-server
+  babel-cli
+  babel-preset-env
+  babel-preset-stage-1
+  babel-preset-react
+  babel-preset-react-optimize
+
+  eslint
+  eslint-config-airbnb
+  eslint-plugin-css-modules
+  eslint-plugin-jsx-a11y
+  eslint-plugin-react
+  eslint-plugin-import
+
+  babel-loader
+  eslint-loader
+  html-loader
+  css-loader
+  file-loader
+  style-loader
+
+  babel-plugin-transform-react-jsx-source
+  babel-plugin-transform-react-jsx-self
+
+
