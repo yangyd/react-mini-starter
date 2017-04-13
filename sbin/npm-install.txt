@@ -26,5 +26,5 @@ npm install --save
 
   babel-plugin-transform-react-jsx-source
   babel-plugin-transform-react-jsx-self
-
+  uglifyjs-webpack-plugin
 
