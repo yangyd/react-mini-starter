@@ -9,6 +9,7 @@ npm install --save
   babel-preset-stage-1
   babel-preset-react
   babel-preset-react-optimize
+  react-hot-loader@next
 
   eslint
   eslint-config-airbnb

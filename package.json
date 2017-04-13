@@ -24,6 +24,7 @@
     "html-loader": "^0.4.5",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-hot-loader": "^3.0.0-beta.6",
     "style-loader": "^0.16.1",
     "uglifyjs-webpack-plugin": "^0.4.2",
     "webpack": "^2.3.3",
@@ -31,9 +32,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --config build-config\\webpack.config.js -p --output-path target",
-    "babel": "babel-node"
+    "build": "webpack --config build-config\\webpack.config.js -p",
+    "start" : "webpack-dev-server --config build-config\\webpack.config.js",
+    "babel": "babel-node",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yangyd",
   "license": "ISC",

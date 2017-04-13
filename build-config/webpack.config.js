@@ -8,7 +8,11 @@ const path = require('path');
 // const nodeEnv = process.env.NODE_ENV || 'development';
 const nodeEnv = process.env.NODE_ENV || 'production';
 const isProd = nodeEnv === 'production';
-const isDebug = !isProd;
+
+console.log(`Building for ${isProd ? 'production' : 'development'}...`);
+
+const app_bundle_name = 'app.bundle.js';
+const commons_bundle_name = 'commons.bundle.js';
 
 // ===========================================================================
 //                            Plugins Config
@@ -25,7 +29,7 @@ const plugins_base = [
   new webpack.optimize.CommonsChunkPlugin({
     name: 'commons',
     minChunks: Infinity,
-    filename: 'commons.bundle.js',
+    filename: commons_bundle_name,
   }),
 ];
 
@@ -40,28 +44,43 @@ const plugins_prod = [
 
 
 // ===========================================================================
-//                            Webpack Config
+//                            Build Config
 // ===========================================================================
 
 const sourcePath = path.resolve(__dirname, '../src');
-const staticsPath = path.resolve(__dirname, '../public');
+const outputPath = path.resolve(__dirname, '../target');
 const depsPath = path.resolve(__dirname, '../node_modules');
+const publicPath = '/'; // CDN prefix to load built modules
 
 const resolve = {
-  extensions: ['.webpack-loader.js', '.web-loader.js', '.loader.js', '.js', '.jsx'],
+  extensions: [
+    // '.webpack-loader.js', '.web-loader.js', '.loader.js',
+    '.js', '.jsx',
+  ],
   modules: [ sourcePath, depsPath ],
 };
 
+const entry = [ './index.jsx' ];
+const entry_dev = [
+  'react-hot-loader/patch',
+  'webpack-dev-server/client?http://localhost:8080',
+  'webpack/hot/only-dev-server',
+];
+
+
+// ===========================================================================
+//                            Put them all together
+// ===========================================================================
 module.exports = {
-  devtool: isProd ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool: isProd ? 'source-map' : 'cheap-module-source-map',
   context: sourcePath,
-  entry: {
-    app: './index.jsx',
-  },
   output: {
-    path: staticsPath,
-    filename: '[name].bundle.js'
+    path: outputPath,
+    filename: app_bundle_name,
+    publicPath,
   },
+
+  entry: (isProd ? [] : entry_dev).concat(entry),
 
   module: { rules: require('./webpack-loaders')(isProd) },
 
@@ -69,26 +88,6 @@ module.exports = {
 
   resolve,
 
-  devServer: {
-    contentBase: './src',
-    historyApiFallback: true,
-    port: 3000,
-    compress: isProd,
-    inline: !isProd,
-    hot: !isProd,
-    stats: {
-      assets: true,
-      children: false,
-      chunks: false,
-      hash: false,
-      modules: false,
-      publicPath: false,
-      timings: true,
-      version: false,
-      warnings: true,
-      colors: {
-        green: '\u001b[32m',
-      }
-    },
-  }
+  devServer: require('./webpack-devserver')(isProd, outputPath, publicPath)
 };
+
