@@ -68,13 +68,15 @@ const rule_load_file = (isProd) => ({
   },
 });
 
+// copy index.html.template as-is
 const rule_load_index = {
-  test: /index\.html$/,
+  test: /index\.html\.template$/,
   loader: 'file-loader',
   query: { name: '[name].[ext]' },
 };
 
-function loaders(isProd) {
+
+module.exports = function (isProd) {
   return [
     rule_load_babel(isProd),
     rule_load_html,
@@ -82,7 +84,5 @@ function loaders(isProd) {
     rule_load_css,
     rule_load_index,
   ];
-}
-
-module.exports = loaders;
+};
 

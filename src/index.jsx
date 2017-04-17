@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import GridApp from 'component/GridApp';
 import {fields, transactions} from 'grid-data';
 
-require('./index.html');
+require('./index.html.template');
 
 ReactDOM.render(
   <GridApp gridFields={fields} transactions={transactions} />,

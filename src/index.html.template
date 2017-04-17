@@ -7,8 +7,8 @@
 </head>
 <body>
   <div id="root"></div>
-  <script src="commons.bundle.js"></script>
-  <script src="app.bundle.js"></script>
+  <script src="#COMMONS_BUNDLE#"></script>
+  <script src="#MAIN_BUNDLE#"></script>
 </body>
 </html>
 

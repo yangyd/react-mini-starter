@@ -18,7 +18,7 @@ console.log(`Building for ${is_prod ? 'production' : 'development'}...`);
 const source_path = path.resolve(__dirname, '../src');
 const output_path = path.resolve(__dirname, '../target');
 const dep_path = path.resolve(__dirname, '../node_modules');
-const public_prefix = '/'; // CDN prefix to load built modules
+const public_prefix = 'http://localhost:8080/'; // CDN prefix to load built modules
 
 const bundle_name_pattern = is_prod ? '[name]-[chunkhash:12].js' : '[name].js';
 
