@@ -4,6 +4,7 @@
   "description": "learn webpack2",
   "main": "src/index.js",
   "dependencies": {
+    "assets-webpack-plugin": "^3.5.1",
     "babel-cli": "^6.24.1",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-react-jsx-self": "^6.22.0",
@@ -33,7 +34,7 @@
   "devDependencies": {},
   "scripts": {
     "build": "webpack --config build-config\\webpack.config.js -p",
-    "start" : "webpack-dev-server --config build-config\\webpack.config.js",
+    "start": "webpack-dev-server --config build-config\\webpack.config.js",
     "babel": "babel-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
