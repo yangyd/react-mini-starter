@@ -23,6 +23,10 @@ html-loader
 css-loader
 file-loader
 style-loader
+postcss-loader
+
+precss
+autoprefixer
 
 assets-webpack-plugin
 uglifyjs-webpack-plugin
