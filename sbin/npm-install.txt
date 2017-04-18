@@ -10,6 +10,7 @@ babel-preset-react
 babel-preset-react-optimize
 react-hot-loader@next
 
+babel-eslint
 eslint
 eslint-config-airbnb
 eslint-plugin-css-modules

@@ -1,12 +1,13 @@
 {
-  "name": "webpack2",
+  "name": "react-mini-starter",
   "version": "1.0.0",
-  "description": "learn webpack2",
+  "description": "Minimalist React SPA starter",
   "main": "src/index.js",
   "dependencies": {
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^6.7.7",
     "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.2",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-react-jsx-self": "^6.22.0",
     "babel-plugin-transform-react-jsx-source": "^6.22.0",
@@ -37,6 +38,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "lint": "eslint src",
     "build": "webpack --config build-config\\webpack.config.js -p && node sbin\\insert-asset-path.js",
     "start": "webpack-dev-server --config build-config\\webpack.config.js",
     "clean": "rimraf target",
@@ -44,7 +46,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "yangyd",
-  "license": "ISC",
+  "license": "MIT",
   "babel": {
     "presets": [
       [
