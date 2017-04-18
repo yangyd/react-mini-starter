@@ -4,13 +4,15 @@ React SPA Starter
 
 ## what's inside
 
-- Minimalist setup for developing React SPA client.
-- Modulized & sensible Webpack config (e.g. source-map, dev-server, etc)
-- Babel stage-1 feature (e.g. static class members)
-- Assets pipeline
-- A sample app
+This is a minimalist project setup for developing React SPA client. You are encouraged to hack the [Webpack configuration](./build-config) directly. By default it includes:
 
-## CLI
+- Modulized & sensible Webpack config for both production/development environment
+- ES6 with TC39 stage-1 feature
+- CSS Modules and PostCSS (only a few basic PostCSS plugins are included)
+- Assets pipeline support
+- A sample budget application, based on the example in https://github.com/ModusCreateOrg/budgeting-sample-app
+
+## NPM Scripts
 
 ```
 npm run build
@@ -40,8 +42,3 @@ Removes the `target` directory.
 2. clean up webpack.config.js
 3. check https://webpack.js.org/guides/hmr-react/
 4. integrate others.config.js
-
-
-
-
-
