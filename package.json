@@ -1,8 +1,9 @@
 {
   "name": "react-mini-starter",
   "version": "1.0.0",
-  "description": "Minimalist React SPA starter",
-  "main": "src/index.js",
+  "description": "Minimalist project starter for React SPA",
+  "main": "src/index.jsx",
+  "repository": "yangyd/react-mini-starter",
   "dependencies": {
     "assets-webpack-plugin": "^3.5.1",
     "autoprefixer": "^6.7.7",
@@ -42,10 +43,9 @@
     "build": "webpack --config build-config\\webpack.config.js -p && node sbin\\insert-asset-path.js",
     "start": "webpack-dev-server --config build-config\\webpack.config.js",
     "clean": "rimraf target",
-    "babel": "babel-node",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "babel": "babel-node"
   },
-  "author": "yangyd",
+  "author": "Yuedong Yang",
   "license": "MIT",
   "babel": {
     "presets": [
