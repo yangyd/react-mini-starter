@@ -1,6 +1,6 @@
 
 import React, { Component, PropTypes } from 'react';
-import './style.css';
+import style from './style.css';
 
 const { string, shape, arrayOf, object, node } = PropTypes;
 
@@ -9,7 +9,7 @@ export default class Grid extends Component {
     fields: arrayOf(shape({
       name: string,
       mapping: string,
-      className: string
+      styleClass: string
     })).isRequired,
 
     data: arrayOf(object),
@@ -25,7 +25,7 @@ export default class Grid extends Component {
           <Row>
             {
               fields.map((field, index) => {
-                return <Cell text={field.name} key={`th${index}`} className={field.className} />;
+                return <Cell text={field.name} key={`th${index}`} styleClass={field.styleClass} />;
               })
             }
           </Row>
@@ -65,12 +65,12 @@ export class Cell extends Component {
   };
 
   render() {
-    const { text, className, children } = this.props;
+    const { text, styleClass, children } = this.props;
 
     // Allow user to put other components in the Cell
     return this.context.header ?
-      <th className={className}>{text}</th> :
-      <td className={className}>{text || children}</td>;
+      <th className={style[styleClass]}>{text}</th> :
+      <td className={style[styleClass]}>{text || children}</td>;
   }
 }
 
@@ -89,8 +89,8 @@ function buildRow(fields, row, rowIndex) {
   return (
     <Row key={`row${rowIndex}`}>
       {
-        fields.map((f, cellIndex) =>
-                   <Cell text={row[f.mapping]} className={f.className} key={`cell${cellIndex}`} />)
+        fields.map((field, cellIndex) =>
+                   <Cell text={row[field.mapping]} styleClass={field.styleClass} key={`cell${cellIndex}`} />)
       }
     </Row>
   );

@@ -27,12 +27,12 @@ export const transactions = [
 export const fields = [
   {
     name: 'Description',
-    className: 'flex',
+    styleClass: 'flex',
     mapping: 'description'
   },
   {
     name: 'Value',
-    className: 'align-right',
+    styleClass: 'align-right',
     mapping: 'value'
   }
 ];

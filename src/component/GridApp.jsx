@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import Header from './Header';
 import Grid from './Grid';
 
-import './GridApp.css';
+import style from './GridApp.css';
 
 export default class GridApp extends Component {
 
@@ -37,7 +37,7 @@ export default class GridApp extends Component {
     const addEntry = this.addEntry.bind(this);
 
     return (
-      <div className="viewport">
+      <div className={style.viewport}>
         <Header />
         <Grid {...this.state}>
           <TransactionSummary fields={this.state.fields} data={summary} />
@@ -53,7 +53,7 @@ class TransactionSummary extends Component {
   static propTypes = {
     fields: arrayOf(shape({
       mapping: string,
-      className: string
+      styleClass: string
     })).isRequired,
     data: object
   };
@@ -65,7 +65,7 @@ class TransactionSummary extends Component {
         <Grid.Row>
           {
             fields.map((field, index) => {
-              return <Grid.Cell text={data[field.mapping]} className={field.className} key={`tf${index}`} />;
+              return <Grid.Cell text={data[field.mapping]} styleClass={field.styleClass} key={`tf${index}`} />;
             })
           }
         </Grid.Row>
