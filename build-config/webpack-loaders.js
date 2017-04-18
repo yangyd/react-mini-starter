@@ -31,15 +31,15 @@ const babel_plugins_dev = [
   'react-hot-loader/babel',
 ];
 
-const rule_load_babel = (isProd) => ({
+const rule_load_babel = (is_prod) => ({
   test: /\.jsx?$/,
   loader: 'babel-loader',
   include: [path.resolve(__dirname, '../src')],
   query: {
-    cacheDirectory: !isProd,
+    cacheDirectory: !is_prod,
     babelrc: false,
-    presets: babel_presets.concat(isProd ? babel_presets_prod : babel_presets_dev),
-    plugins: babel_plugins.concat(isProd ? [] : babel_plugins_dev),
+    presets: babel_presets.concat(is_prod ? babel_presets_prod : babel_presets_dev),
+    plugins: babel_plugins.concat(is_prod ? [] : babel_plugins_dev),
   },
 });
 
@@ -55,16 +55,32 @@ const rule_load_html = {
   }],
 };
 
-const rule_load_css = {
-  test: /\.css$/,
-  use: [ 'style-loader', 'css-loader' ],
-};
+const rule_load_css = (is_prod) => ({
+  test: /\.css/,
+  use: [
+    { loader: 'style-loader' },
+    {
+      loader: 'css-loader',
+      options: {
+        importLoaders: 1,
+        sourceMap: !is_prod,
+        modules: true,
+        localIdentName: is_prod ? '[hash:base64:6]' : '[name]-[local]-[hash:base64:6]',
+        minimize: is_prod,
+      },
+    },
+    {
+      loader: 'postcss-loader',
+      options: { config: path.resolve(__dirname, 'postcss.config.js') },
+    },
+  ],
+});
 
-const rule_load_file = (isProd) => ({
+const rule_load_file = (is_prod) => ({
   test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
   loader: 'file-loader',
   query: {
-    name: isProd ? '[hash:8].[ext]' : '[path][name].[ext]?[hash:8]',
+    name: is_prod ? '[hash:8].[ext]' : '[path][name].[ext]?[hash:8]',
   },
 });
 
@@ -76,12 +92,12 @@ const rule_load_index = {
 };
 
 
-module.exports = function (isProd) {
+module.exports = function (is_prod) {
   return [
-    rule_load_babel(isProd),
+    rule_load_babel(is_prod),
     rule_load_html,
-    rule_load_file(isProd),
-    rule_load_css,
+    rule_load_file(is_prod),
+    rule_load_css(is_prod),
     rule_load_index,
   ];
 };
