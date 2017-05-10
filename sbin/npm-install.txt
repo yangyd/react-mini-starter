@@ -34,4 +34,16 @@ uglifyjs-webpack-plugin
 babel-plugin-transform-react-jsx-source
 babel-plugin-transform-react-jsx-self
 
+
+karma
+karma-jasmine
+karma-phantomjs-launcher
+karma-webpack
+karma-sourcemap-loader
+karma-coverage-istanbul-reporter
+
+jasmine-core
+
+
 rimraf
+
