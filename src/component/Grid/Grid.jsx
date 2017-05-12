@@ -1,6 +1,6 @@
 
 import React, { Component, PropTypes } from 'react';
-import style from './style.css';
+import styles from './style.css';
 
 const { string, shape, arrayOf, object, node } = PropTypes;
 
@@ -43,11 +43,11 @@ export class Header extends Component {
   };
 
   static childContextTypes = {
-    header: PropTypes.bool
+    inHeader: PropTypes.bool
   };
 
   getChildContext() {
-    return { header: true };
+    return { inHeader: true };
   }
 
   render() {
@@ -61,16 +61,16 @@ export class Cell extends Component {
   };
 
   static contextTypes = {
-    header: PropTypes.bool,
+    inHeader: PropTypes.bool,
   };
 
   render() {
     const { text, styleClass, children } = this.props;
 
     // Allow user to put other components in the Cell
-    return this.context.header ?
-      <th className={style[styleClass]}>{text}</th> :
-      <td className={style[styleClass]}>{text || children}</td>;
+    return this.context.inHeader ?
+      <th className={styles[styleClass]}>{text}</th> :
+      <td className={styles[styleClass]}>{text || children}</td>;
   }
 }
 

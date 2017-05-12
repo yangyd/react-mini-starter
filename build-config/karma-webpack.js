@@ -1,6 +1,9 @@
 
 const webpack = require('webpack');
 const path = require('path');
+
+// Force Webpack to build for development (so that CSS Modules doesn't mangle className too hard)
+process.env.NODE_ENV = 'development';
 const webpackConfig = require('./webpack.config');
 
 // include test sources in Babel loader

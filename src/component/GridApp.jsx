@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import Header from './Header';
 import Grid from './Grid';
 
-import style from './GridApp.css';
+import styles from './GridApp.css';
 
 export default class GridApp extends Component {
 
@@ -37,7 +37,7 @@ export default class GridApp extends Component {
     const addEntry = this.addEntry.bind(this);
 
     return (
-      <div className={style.viewport}>
+      <div className={styles.viewport}>
         <Header />
         <Grid {...this.state}>
           <TransactionSummary fields={this.state.fields} data={summary} />

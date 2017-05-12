@@ -2,17 +2,16 @@
 React SPA Mini Starter
 ======================
 
-This is a minimalist project setup for developing React SPA. The intention is to provide a solid basement for development or prototyping while avoid putting too many assumptions at the beginning (There're already lots of choices for heavily opinionated starters out there).
+This is a minimalist project setup for developing React SPA. The intention is to provide a solid basement for prototyping or production-ready development while avoid putting too many assumptions from the beginning (There're already lots of scarily opinionated starters out there if you like).
 
 You are encouraged to hack the [build configuration](./build-config) directly, but if you don't change anything, you have:
 
-- Modulized & sensible Webpack config for both development and production (hot reload, source map, etc.)
-- React JSX, ES6 with TC39 stage-1 features
-- CSS Modules and PostCSS (including only a few PostCSS plugins, add as you need)
+- Clean & sensible Webpack configuration for both development and production (hot reload, source map, etc.)
+- React JSX & [modern Javascript features](http://babeljs.io/docs/plugins/preset-stage-1/)
+- [CSS Modules](https://github.com/css-modules/css-modules) and [PostCSS](http://postcss.org/)
 - Assets pipeline support
 - ESLint with generally followed lint rules
 - Unit test support (see below)
-
 
 A simple React application, based on the [Budget Sample App], is included as example of the build.
 There's no server-side concern involved, so this setup can be used along with any kind of web technology, or just for static web hosting.

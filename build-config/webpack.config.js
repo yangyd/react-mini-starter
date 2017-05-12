@@ -9,7 +9,7 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const node_env = process.env.NODE_ENV || 'production';
 const is_prod = node_env === 'production';
 
-console.log(`Building for ${is_prod ? 'production' : 'development'}...`);
+console.log(`Building for ENV: ${is_prod ? 'production' : node_env}`);
 
 
 // ===========================================================================

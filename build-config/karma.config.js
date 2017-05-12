@@ -50,7 +50,9 @@ const config = {
   },
   frameworks: ['jasmine'],
   exclude: [],
+
   webpack: require('./karma-webpack')(),
+  webpackServer: { noInfo: true },
 
   reporters: ['progress'],
 
