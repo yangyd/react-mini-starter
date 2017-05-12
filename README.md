@@ -45,6 +45,18 @@ npm start
 Start the dev server. Before dev server can be used, the project must be built once in development mode (to prepare the index.html with proper asset pathes for the dev server).
 
 ```
+npm test
+```
+
+Run unit tests with Karma (single-run).
+
+```
+npm run karma
+```
+
+Start Karma in watching mode (which runs unit tests on code change).
+
+```
 npm run clean
 ```
 
@@ -60,5 +72,7 @@ Lint the code with ESLint.
 
 - integrate ESLint into build process ([eslint-loader](https://github.com/MoOx/eslint-loader))
 
+- migrate to [prop-types]
 
 [Budget Sample App]: https://github.com/ModusCreateOrg/budgeting-sample-app
+[prop-types]: https://facebook.github.io/react/blog/2017/04/07/react-v15.5.0.html#migrating-from-react.proptypes

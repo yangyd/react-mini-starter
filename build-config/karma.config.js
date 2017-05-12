@@ -65,8 +65,6 @@ const config = {
   browsers: ['PhantomJS'],
   port: 9876,
   colors: true,
-  autoWatch: false,
-  singleRun: true,
   concurrency: Infinity,
 };
 

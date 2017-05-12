@@ -49,6 +49,8 @@
     "webpack-dev-server": "^2.4.2"
   },
   "scripts": {
+    "test": "karma start .\\build-config\\karma.config.js --single-run --no-auto-watch",
+    "karma": "karma start .\\build-config\\karma.config.js --auto-watch --no-single-run",
     "lint": "eslint src",
     "build": "webpack --config build-config\\webpack.config.js -p && node sbin\\insert-asset-path.js",
     "start": "webpack-dev-server --config build-config\\webpack.config.js",
