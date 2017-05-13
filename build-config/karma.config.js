@@ -2,6 +2,7 @@
 const basePath = '..'; // project root
 const report_dir = 'target/test-reports';
 
+// Config test & coverage reporters
 const specReporter = {
   maxLogLines: 5,
   suppressErrorSummary: true,
@@ -12,20 +13,11 @@ const specReporter = {
   failFast: true,
 };
 
-const coverageReporter = {
-  dir: report_dir + '/coverage',
-  reporters: [
-    { type: 'html', subdir: 'html' },
-    { type: 'text', subdir: '.', file: 'summary.txt' },
-    { type: 'cobertura', subdir: '.', file: 'cobertura.txt' },
-  ],
-};
-
 const junitReporter = {
   outputDir: report_dir,
   outputFile: 'report-junit.xml',
   suite: '',
-  useBrowserName: true,
+  useBrowserName: false,
   nameFormatter: undefined,
   classNameFormatter: undefined,
   properties: {},
@@ -33,18 +25,24 @@ const junitReporter = {
 };
 
 const coverageIstanbulReporter = {
-  reports: ['text-summary'],
+  dir: report_dir + '/coverage',
+  reports: ['text', 'html', 'cobertura'],
+
   fixWebpackSourcePaths: true,
+  skipFilesWithNoCoverage: true,
+
+  'report-config': {
+    html: { subdir: 'html' },
+    text: { subdir: '.', file: 'summary.txt' },
+    cobertura: { subdir: '.', file: 'cobertura.txt' },
+  },
 };
 
 
-// https://github.com/airbnb/enzyme/blob/master/docs/guides/webpack.md
-// https://github.com/lelandrichardson/enzyme-example-karma-webpack
-// https://github.com/erikras/react-redux-universal-hot-example
-
+// Assemble the Karma configuration
 const config = {
   basePath,
-  files: ['test/test-index.js'],
+  files: ['test/test-index.js'], // entry point of karma-webpack
   preprocessors: {
     'test/test-index.js': ['webpack', 'sourcemap'],
   },
@@ -54,15 +52,10 @@ const config = {
   webpack: require('./karma-webpack')(),
   webpackServer: { noInfo: true },
 
-  reporters: ['progress'],
-
-  // reporters: ['progress', 'coverage-istanbul'],
-  // coverageIstanbulReporter,
-
-  // reporters: ['spec', 'junit', 'coverage'],
-  // specReporter,
-  // junitReporter,
-  // coverageReporter,
+  reporters: 'spec,junit,coverage-istanbul'.split(','),
+  specReporter,
+  junitReporter,
+  coverageIstanbulReporter,
 
   browsers: ['PhantomJS'],
   port: 9876,

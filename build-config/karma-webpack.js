@@ -6,10 +6,13 @@ const path = require('path');
 process.env.NODE_ENV = 'development';
 const webpackConfig = require('./webpack.config');
 
-// include test sources in Babel loader
+// Config the Babel loader for test
+//   - include test sources
+//   - enable istanbul instrumenter
 webpackConfig.module.rules.forEach(rule => {
   if (rule.loader === 'babel-loader') {
     rule.include.push(path.resolve(__dirname, '../test'));
+    rule.query.plugins.unshift('istanbul');
   }
 });
 
