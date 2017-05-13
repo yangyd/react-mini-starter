@@ -1,5 +1,5 @@
 
-// entry point of karma-webpack
-var context = require.context('.', true, /(spec|test)\.jsx?$/);
+// The entry point of karma-webpack
+const context = require.context('.', true, /(spec|test)\.jsx?$/);
 context.keys().forEach(context);
 

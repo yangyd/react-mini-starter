@@ -11,19 +11,29 @@ You are encouraged to hack the [build configuration](./build-config) directly, b
 - [CSS Modules](https://github.com/css-modules/css-modules) and [PostCSS](http://postcss.org/)
 - Assets pipeline support
 - ESLint with generally followed lint rules
-- Unit test support (see below)
+- Karma unit test with coverage report (see below)
 
-A simple React application, based on the [Budget Sample App], is included as example of the build.
-There's no server-side concern involved, so this setup can be used along with any kind of web technology, or just for static web hosting.
+A simple React application, based on the [Budget Sample App], is included as demonstration of the project setup. No server-side concern is involved so that this setup can be used along with any kind of web technology, or just for static web hosting.
 
 ## Unit test
 
-Testing front end application is way more diversified than development, and the tools chosen have huge impact at how test cases are written and organized. The test solution included here tries to keep things simple and extendable.
+Testing front end application is way more diversified than development, and the tools chosen have huge impact at how test cases are written and organized. The test solution included here tries to keep things simple but extendable. As said above, you are encouraged to hack the [configuration](./build-config/karma.config.js) as needed.
 
-Test cases are supposed to be put in the `test/` directory and ends with `spec.js` or `test.js`. Test sources are also loaded by Webpack with similar settings of the application sources so ES6 and JSX syntax is available. Some example cases are included.
+Test cases go under the `test/` directory and should end with `spec.js` or `test.js`. Test sources are also loaded by Webpack and Babel so ES6 and JSX syntax is available. A few tests, which uses Enzyme and Jasmine, for the example application are included as demonstration.
 
-The test framework is Enzyme + Jasmine, more sophisticated tools like Sinon are not included, and only PhantomJS is included as test browser in the [Karma config](./build-config/karma.config.js). As said above, you are encouraged to hack the config as need.
+Test result and coverage reports are generated under the `target/test-reports` directory. The following files are generated:
 
+```
+target/
+│
+└───test-reports/
+    │   report-junit.xml    (JUnit format report)
+    │
+    └───coverage/
+        │   cobertura.txt   (Cobertura format coverage report)
+        │   summary.txt     (Istanbul coverage summary)
+        └───html/           (Istanbul coverage details)
+```
 
 ## NPM Scripts
 
@@ -41,25 +51,25 @@ The result distributables are located in the `target` directory.
 npm start
 ```
 
-Start the dev server. Before dev server can be used, the project must be built once in development mode (to prepare the index.html with proper asset pathes for the dev server).
+Start the dev server. *Before dev server can be used, the project must be built once in development mode* (in order to prepare the index.html with proper asset pathes for the dev server).
 
 ```
 npm test
 ```
 
-Run unit tests with Karma (single-run).
+Run unit tests with Karma and generate reports (single-run).
 
 ```
 npm run karma
 ```
 
-Start Karma in watching mode (which runs unit tests on code change).
+Start Karma server in watch mode
 
 ```
 npm run clean
 ```
 
-Removes the `target` directory for clean build.
+Nuke the `target` directory for clean build. Note this also removes test and coverage reports.
 
 ```
 npm run lint
@@ -71,7 +81,9 @@ Lint the code with ESLint.
 
 - integrate ESLint into build process ([eslint-loader](https://github.com/MoOx/eslint-loader))
 
-- migrate to [prop-types]
+- fix the [prop-types] deprecation issue in example app
+
+- more tests
 
 [Budget Sample App]: https://github.com/ModusCreateOrg/budgeting-sample-app
 [prop-types]: https://facebook.github.io/react/blog/2017/04/07/react-v15.5.0.html#migrating-from-react.proptypes
