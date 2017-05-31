@@ -18,7 +18,7 @@ const babel_presets = [
     },
   ],
   'react',
-  'stage-1', // order matters
+  'stage-2', // order matters
 ];
 
 const babel_presets_dev = [];

@@ -17,7 +17,7 @@
     "babel-preset-env": "^1.3.3",
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-optimize": "^1.0.1",
-    "babel-preset-stage-1": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.0",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
@@ -59,22 +59,8 @@
     "build": "webpack --config build-config\\webpack.config.js -p && node sbin\\insert-asset-path.js",
     "start": "webpack-dev-server --config build-config\\webpack.config.js",
     "clean": "rimraf target",
-    "babel": "babel-node"
+    "babel": "babel-node --presets env"
   },
   "author": "Yuedong Yang",
-  "license": "MIT",
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": [
-              "current"
-            ]
-          }
-        }
-      ]
-    ]
-  }
+  "license": "MIT"
 }
