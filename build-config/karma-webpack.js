@@ -6,15 +6,30 @@ const path = require('path');
 process.env.NODE_ENV = 'development';
 const webpackConfig = require('./webpack.config');
 
+const src_dir = path.resolve(__dirname, '../src');
+const test_src_dir = path.resolve(__dirname, '../test');
+
+
 // Config the Babel loader for test
 //   - include test sources
 //   - enable istanbul instrumenter
-webpackConfig.module.rules.forEach(rule => {
+webpackConfig.module.rules.some(rule => {
   if (rule.loader === 'babel-loader') {
-    rule.include.push(path.resolve(__dirname, '../test'));
+    rule.include.push(test_src_dir);
     rule.query.plugins.unshift('istanbul');
+    return true;
   }
 });
+
+// Enable ESLint check
+webpackConfig.module.rules.push({
+  loader: "eslint-loader",
+  test: /\.jsx?$/,
+  include: [src_dir, test_src_dir],
+  exclude: /node_modules/,
+  enforce: "pre",
+});
+
 
 module.exports = () => ({
   devtool: 'inline-source-map',

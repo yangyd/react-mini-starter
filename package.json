@@ -55,7 +55,7 @@
   "scripts": {
     "test": "karma start .\\build-config\\karma.config.js --single-run --no-auto-watch",
     "karma": "karma start .\\build-config\\karma.config.js --auto-watch --no-single-run",
-    "lint": "eslint src",
+    "lint": "eslint --cache --ext .jsx,.js src test || exit 0",
     "build": "webpack --config build-config\\webpack.config.js -p && node sbin\\insert-asset-path.js",
     "start": "webpack-dev-server --config build-config\\webpack.config.js",
     "clean": "rimraf target",

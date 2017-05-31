@@ -1,0 +1,19 @@
+
+parser:
+  babel-eslint
+
+plugins:
+  - css-modules
+
+extends:
+  - airbnb
+  - plugin:css-modules/recommended
+
+env:
+  browser: true
+
+rules:
+  import/extensions: off
+  import/no-extraneous-dependencies: off
+  react/jsx-filename-extension: off
+  react/prefer-stateless-function: off
