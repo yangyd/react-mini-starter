@@ -1,101 +1,73 @@
 
-import React, { Component, PropTypes } from 'react';
-import styles from './style.css';
+/* eslint react/jsx-closing-bracket-location: ["warn", { selfClosing: "after-props" }] */
 
-const { string, shape, arrayOf, object, node } = PropTypes;
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export default class Grid extends Component {
-  static propTypes = {
-    fields: arrayOf(shape({
-      name: string,
-      mapping: string,
-      styleClass: string
-    })).isRequired,
+import Header from './Header';
+import Cell from './Cell';
 
-    data: arrayOf(object),
+const { string, number, shape, arrayOf, node } = PropTypes;
 
-    children: node
-  };
-
-  render() {
-    const { fields, data, children } = this.props;
-    return (
-      <table>
-        <Header>
-          <Row>
-            {
-              fields.map((field, index) => {
-                return <Cell text={field.name} key={`th${index}`} styleClass={field.styleClass} />;
-              })
-            }
-          </Row>
-        </Header>
-        {buildBody(fields, data)}
-        {children}
-      </table>
-    ); // {children}: allow component user to add more elements (like <Footer />)
-  }
+export function Row({ children }) {
+  return <tr>{ children }</tr>;
 }
-
-export class Header extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired
-  };
-
-  static childContextTypes = {
-    inHeader: PropTypes.bool
-  };
-
-  getChildContext() {
-    return { inHeader: true };
-  }
-
-  render() {
-    return <thead>{this.props.children}</thead>;
-  }
+export function Body({ children }) {
+  return <tbody>{ children }</tbody>;
 }
-
-export class Cell extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-  };
-
-  static contextTypes = {
-    inHeader: PropTypes.bool,
-  };
-
-  render() {
-    const { text, styleClass, children } = this.props;
-
-    // Allow user to put other components in the Cell
-    return this.context.inHeader ?
-      <th className={styles[styleClass]}>{text}</th> :
-      <td className={styles[styleClass]}>{text || children}</td>;
-  }
+export function Footer({ children }) {
+  return <tfoot>{ children }</tfoot>;
 }
+Row.propTypes = { children: node.isRequired };
+Body.propTypes = { children: node.isRequired };
+Footer.propTypes = { children: node.isRequired };
 
-// Row, Body, Footer are just aliases for native elements
-export function Row({children}) {
-  return <tr>{children}</tr>;
-}
-export function Body({children}) {
-  return <tbody>{children}</tbody>;
-}
-export function Footer({children}) {
-  return <tfoot>{children}</tfoot>;
-}
-
-function buildRow(fields, row, rowIndex) {
+function buildRow(fields, row) {
   return (
-    <Row key={`row${rowIndex}`}>
+    <Row key={`row-${row.id}`}>
       {
-        fields.map((field, cellIndex) =>
-                   <Cell text={row[field.mapping]} styleClass={field.styleClass} key={`cell${cellIndex}`} />)
+        fields.map(field =>
+          <Cell key={field.mapping} text={row[field.mapping]} styleClass={field.styleClass} />)
       }
     </Row>
   );
 }
 
-function buildBody(fields, data) {
-  return <Body>{data.map((row, index) => buildRow(fields, row, index))}</Body>;
+function tableBody(fields, transactions) {
+  return <Body>{ transactions.map(item => buildRow(fields, item)) }</Body>;
 }
+
+export default function Grid(props) {
+  const { fields, transactions, children } = props;
+  return (
+    <table>
+      <Header>
+        <Row>
+          {
+            fields.map(field =>
+              <Cell text={field.name} key={field.mapping} styleClass={field.styleClass} />)
+          }
+        </Row>
+      </Header>
+      { tableBody(fields, transactions) }
+      { children }
+    </table>
+  );
+}
+
+Grid.propTypes = {
+  fields: arrayOf(shape({
+    name: string,
+    mapping: string,
+    styleClass: string,
+  })).isRequired,
+
+  transactions: arrayOf(shape({
+    id: number,
+    displayName: string, // display name of the sum
+    value: number, // the sum of all items
+  })).isRequired,
+
+  children: node,
+};
+

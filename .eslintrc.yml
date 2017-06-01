@@ -14,3 +14,12 @@ extends:
 
 env:
   browser: true
+
+rules:
+  padded-blocks: off
+
+  # Loose restriction on indentation and member ordering in React/JSX
+  react/sort-comp: off
+  react/jsx-first-prop-new-line: off
+  react/jsx-closing-bracket-location: off
+

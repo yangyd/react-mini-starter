@@ -2,8 +2,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import GridApp from 'component/GridApp';
-import {fields, transactions} from 'grid-data';
+import GridApp from './component/GridApp';
+import { fields, transactions } from './grid-data';
 
 require('./index.html.template');
 
