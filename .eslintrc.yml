@@ -8,12 +8,9 @@ plugins:
 extends:
   - airbnb
   - plugin:css-modules/recommended
+  - plugin:react/recommended
+  - plugin:import/errors
+  - plugin:import/warnings
 
 env:
   browser: true
-
-rules:
-  import/extensions: off
-  import/no-extraneous-dependencies: off
-  react/jsx-filename-extension: off
-  react/prefer-stateless-function: off
